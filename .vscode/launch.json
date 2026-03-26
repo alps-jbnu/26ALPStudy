@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) WSL Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            // 확장자 없이 실행 파일 경로를 잡습니다 (Linux 방식)
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            // 실행 전에 아래 tasks.json의 빌드 작업을 먼저 수행합니다.
+            "preLaunchTask": "C/C++: g++ build active file",
+            "miDebuggerPath": "gdb"
+        }
+    ]
+}
