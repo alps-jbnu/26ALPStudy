@@ -15,6 +15,6 @@ int main()
         result = 1;
     
     cout << result << '\n';
-
+    
     return 0;
 }
