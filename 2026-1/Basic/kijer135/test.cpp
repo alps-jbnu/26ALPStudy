@@ -6,6 +6,8 @@ int main()
 {
 	int num = 0;
 
+    cout << "test";
+
 	cin >> num;
 
 	for (size_t i = 1; i <= num; i++)
@@ -21,6 +23,6 @@ int main()
 		for (size_t j = 0; j < 2 * i - 1; j++) cout << "*";
 		cout << "\n";
 	}
-    
+
 	if (num > 1) for (size_t i = 0; i < 2 * num - 1; i++) cout << "*";
 }
