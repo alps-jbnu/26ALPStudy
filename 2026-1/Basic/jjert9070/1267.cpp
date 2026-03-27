@@ -4,7 +4,6 @@ using namespace std;
 
 int youngsik(vector<int> &callTime);
 int minsik(vector<int> &callTime);
-int sumOfTime(vector<int> &callTime);
 
 int main()
 {
@@ -13,60 +12,57 @@ int main()
 
     int counter;
     int i;
-    
+    int y_result, m_result;
+   
     cin >> counter;
     vector<int> callTime(counter);
-
+    
     for(i = 0; i < counter; i++)
     {
         cin >> callTime[i];
     }
-    if(youngsik(callTime) < minsik(callTime))
+    y_result = youngsik(callTime);
+    m_result = minsik(callTime);
+    
+    if(y_result < m_result)
     {
-        cout << "M " << youngsik(callTime) << '\n';
+        cout << "Y " << y_result << '\n';
     }
-    else if(youngsik(callTime) == minsik(callTime))
+    else if(y_result == m_result)
     {
-        cout << "Y M "<< minsik(callTime) << '\n';
+        cout << "Y M "<< m_result << '\n';
     }
-    else if(youngsik(callTime) > minsik(callTime))
+    else if(y_result > m_result)
     {
-        cout << "M " << minsik(callTime) <<'\n';
+        cout << "M " << m_result <<'\n';
     }
 
 }
 
 int youngsik(vector<int> &callTime)
 {
+    int i, j;
+    int counter, temp;
     int result = 0;
-    int i;
-    bool flag = false;
-    result = sumOfTime(callTime);
-    if(result % 30 != 0) flag = true;
-    if(flag == true) result = (result / 30) * 10 + 10;
-    else result = (result / 30) * 10;
-    return result;
-}
-int minsik(vector<int> &callTime)
-{
-    int result = 0;
-    int i;
-    bool flag = false;
-    result = sumOfTime(callTime);
-    if(result % 60 != 0) flag = true;
-    if(flag == true) result = (result / 60) * 15 + 15;
-    else result = (result / 60) * 15;
-    return result;
-}
-
-int sumOfTime(vector<int> &callTime)
-{
-    int result = 0;
-    int i;
     for(i = 0; i < callTime.size(); i++)
     {
-        result = result + callTime[i];
+        counter = 0;
+        temp = callTime[i];
+        result = result + (callTime[i] / 30 + 1)*10;
     }
+    return result;
+}
 
+int minsik(vector<int> &callTime)
+{
+    int i, j;
+    int counter, temp;
+    int result = 0;
+    for(i = 0; i < callTime.size(); i++)
+    {
+        counter = 0;
+        result = result + (callTime[i] / 60 + 1)*15;
+
+    }
     return result;
 }
