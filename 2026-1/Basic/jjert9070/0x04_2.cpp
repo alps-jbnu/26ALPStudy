@@ -3,6 +3,7 @@
 using namespace std;
 void traverse(int dat[], int pre[], int nxt[]);
 
+
 int main()
 {
     cin.tie(0);
