@@ -1,33 +1,31 @@
-#include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
 
 const int MX = 1000005;
-int data[MX];
+int dat[MX];
 int pos = 0;
 
 void push(int x)
 {
-    data[pos] = x;
-    pos++;
+    dat[pos++] = x;
 }
 
 void pop()
 {
-    if(pos < 0)
+    if(pos-1 < 0)
     {
         return;
     }
     else
     {
-        cout<<data[pos]<<'\n';
+        cout<<dat[pos-1]<<'\n';
         pos--;   
     }
 }
 
 int top()
 {
-    return data[sizeof(data) / sizeof(int) - 1];
+    return dat[pos-1];
 }
 
 void test()
@@ -37,7 +35,6 @@ void test()
     pop();
     pop();
     pop();
-    top();
 }
 
 int main(void)
