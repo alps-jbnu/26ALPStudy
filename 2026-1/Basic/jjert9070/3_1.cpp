@@ -59,7 +59,7 @@ int main(void)
         cin >> x;
         target.push_back(x);
     }
-
+    int flag = 0;
     i = 1; // 스텍이 비어있음
     int j = 0;
     for (list<int>::iterator iter = target.begin(); iter != target.end(); iter++)
@@ -68,6 +68,11 @@ int main(void)
         {   
             if(_S._is_empty())
             {
+                if(i > *iter)
+                {
+                    flag = 1;
+                    break;
+                }
                 _S._push(i);
                 result.push_back('+');
                 i++;
@@ -79,6 +84,11 @@ int main(void)
             }
             else if (_S._top() < *iter)
             {
+                if(i > *iter)
+                {
+                    flag = 1;
+                    break;
+                }
                 _S._push(i);
                 result.push_back('+');
                 i++;
@@ -92,16 +102,19 @@ int main(void)
             j++;
         }
     }
-    cout << '\n';
-
+    if(flag == 1)
+    {
+        cout<<"NO"<<'\n';
+        return 0;
+    }
     for(list<char>::iterator iter = result.begin(); iter != result.end(); iter++)
     {
         cout<<*iter<<'\n';
     }
-    for(list<int>::iterator iter = result_num.begin(); iter != result_num.end(); iter++)
-    {
-        cout<<*iter<<'\n';
-    }
+    //for(list<int>::iterator iter = result_num.begin(); iter != result_num.end(); iter++)
+    //{
+    //    cout<<*iter<<'\n';
+    //}
 
     
     return 0;
