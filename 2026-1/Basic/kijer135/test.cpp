@@ -1,10 +1,16 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 
 int main()
 {
 	int num = 0;
+
+    vector<int> numbers = {1,2,3,4,5};
+
+
+
 
     cout << "test";
 
