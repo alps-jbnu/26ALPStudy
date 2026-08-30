@@ -1,39 +1,31 @@
 #include <iostream>
+#include <unordered_map>
 #include <map>
 
-void deleteNodes(std::map<int, int>& nodes, int problemNumber)
+
+void pushNode(std::map<std::pair<int, int>, bool>& nodes, std::unordered_map<int, std::pair<int, int>>& keyMap, std::pair<int, int> inputKey)
+{
+    nodes.insert({inputKey, true});
+    keyMap[inputKey.second] = inputKey; 
+}
+
+
+void deleteNodes(std::map<std::pair<int, int>, bool>& nodes, std::unordered_map<int, std::pair<int, int>>& keyMap, int problemNumber)
 {
     if(nodes.empty())
     {
         return;
     }
 
-    int targetKey;
-
-    for(auto& select : nodes)
-    {
-        if(select.second == problemNumber)
-        {
-            targetKey = select.second;
-            break;
-        }
-    }
-
-
-
-
-
-
+    nodes.erase(keyMap.at(problemNumber));
+    keyMap.erase(problemNumber);
 
 }
 
-void pushNodes(std::map<int, int>& nodes, const std::pair<int, int> inputNode)
-{
-    nodes.insert(inputNode);
-}
 
 
-std::pair<int, int> getMax(const std::map<int, int>& nodes)
+
+std::pair<int, int> getMax(const std::map<std::pair<int, int>, bool>& nodes)
 {
     if(nodes.empty())
     {
@@ -42,7 +34,7 @@ std::pair<int, int> getMax(const std::map<int, int>& nodes)
 
     std::pair<int, int> result;
 
-    result = *nodes.rbegin();
+    result = (*nodes.rbegin()).first;
 
     return result;
 }
@@ -50,7 +42,7 @@ std::pair<int, int> getMax(const std::map<int, int>& nodes)
 
 
 
-std::pair<int, int> getMin(const std::map<int, int>& nodes)
+std::pair<int, int> getMin(const std::map<std::pair<int, int>, bool>& nodes)
 {
     if(nodes.empty())
     {
@@ -59,13 +51,13 @@ std::pair<int, int> getMin(const std::map<int, int>& nodes)
 
     std::pair<int, int> result;
 
-    result = *nodes.begin();
+    result = (*nodes.begin()).first;
 
     return result;
 }
 
 
-std::pair<int, int> recommendation(std::map<int, int>& nodes, int x)
+std::pair<int, int> recommendation(std::map<std::pair<int, int>, bool>& nodes, int x)
 {
     std::pair<int, int> result;
     if(x == 1)
@@ -74,22 +66,23 @@ std::pair<int, int> recommendation(std::map<int, int>& nodes, int x)
     }
     else if(x == -1)
     {
-        result = getMax(nodes);
+        result = getMin(nodes);
     }
 
     return result;
 }
 
+
 int main()
 {
+    std::ios::sync_with_stdio(NULL);
+    std::cin.tie(0);
     int n;
 
     int m;
 
-
-
-
-    std::map<int, int> nodes;
+    std::map<std::pair<int, int>, bool> nodes;
+    std::unordered_map<int, std::pair<int, int>> keyMap;
 
     std::cin>>n;
 
@@ -99,10 +92,12 @@ int main()
         int l;
 
         std::cin>>p>>l;
-        nodes.insert({l, p});
+        pushNode(nodes, keyMap, {l, p});
+
     }
 
 
+    std::cin>>m;
 
     for(size_t i = 0; i < m; i++)
     {
@@ -119,22 +114,22 @@ int main()
             result = recommendation(nodes, x);
             std::cout<<result.second<<'\n';
         }
-        else if(command.compare("add"))
+        else if(command.compare("add") == 0)
         {
             int p;
             int l;
             std::cin>>p>>l;
+            pushNode(nodes, keyMap, {l, p});
 
-            pushNodes(nodes, {l, p});
+            
         }
         else if(command.compare("solved") == 0)
         {
             int p;
             std::cin>>p;
-
-
+            deleteNodes(nodes, keyMap, p);
         }
     }
 
-
+    return 0;
 }
