@@ -1,47 +1,11 @@
-# Created by https://toptal.com
-
-### CLion ###
-.idea/
-cmake-build-debug/
-cmake-build-release/
-cmake-build-*/
-
-### C / C++ ###
-*.o
-*.ko
-*.obj
-*.elf
-*.ilk
-*.map
-*.exp
-*.lib
-*.a
-*.la
-*.lo
-*.dll
-*.so
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-### macOS ###
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-.Spotlight-V100
-.Trashes
-
-# 확장자가 없는 빌드 실행 파일 무시 (프로젝트 루트 직하)
-/*
-!_*/
+# ======= macOS Execution Files & dSYM =======
+# 1. 확장자가 없는 macOS 및 Unix 실행 파일 제외
+# (프로젝트 루트 및 하위 폴더의 모든 실행 파일 타겟)
+*
+!*/
 !*.*
+!Dockerfile
+!Makefile
+
+# 2. Xcode 및 컴파일러가 생성하는 dSYM 디버그 폴더 제외
+*.dSYM/
