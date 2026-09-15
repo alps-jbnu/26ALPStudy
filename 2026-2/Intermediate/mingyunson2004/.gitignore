@@ -1,0 +1,11 @@
+# ======= macOS Execution Files & dSYM =======
+# 1. 확장자가 없는 macOS 및 Unix 실행 파일 제외
+# (프로젝트 루트 및 하위 폴더의 모든 실행 파일 타겟)
+*
+!*/
+!*.*
+!Dockerfile
+!Makefile
+
+# 2. Xcode 및 컴파일러가 생성하는 dSYM 디버그 폴더 제외
+*.dSYM/
