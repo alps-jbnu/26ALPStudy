@@ -17,31 +17,35 @@ long long sumFunction(std::vector<long long>& arr, long long select)
     return sum;
 }
 
-
-long long getLowerBoundHeight(std::vector<long long>& arr, long long target)
-{
-    long long result;
-    long long ans;
-    long long start = 0;
-    long long end = arr[arr.size() - 1];
-    long long mid;
-
-    while(start <= end)
+long long getLowerBoundHeight(std::vector<long long>& arr, long long start, long long end, long long target, long long result)
+{    
+    if(start > end)
     {
-        mid = (start + end) / 2;
-        result = sumFunction(arr, mid);
-        if(result >= target)
-        {
-            ans = mid;
-            start = mid + 1;
-        }
-        else if(result < target)
-        {
-            end = mid - 1;
-        }
+        return result;
     }
 
-    return ans;
+    long long mid = (start + end) / 2;
+    long long now = sumFunction(arr, mid);
+    long long ans = 0;
+    long long ret_value = 0;
+
+
+    if(now >= target)
+    {
+        ans = mid;
+        start = mid + 1;
+        ret_value = getLowerBoundHeight(arr, start, end, target, ans);
+    }
+    else if(now < target)    
+    {
+        end = mid - 1;
+        ret_value = getLowerBoundHeight(arr, start, end, target, result);
+    }
+
+
+
+
+    return ret_value;
 }
 
 
@@ -66,7 +70,7 @@ int main()
 
     std::sort(arr.begin(), arr.end());
 
-    res = getLowerBoundHeight(arr, m);
+    res = getLowerBoundHeight(arr, 0, arr[arr.size() - 1], m, 0);
 
     std::cout<<res<<'\n';
     

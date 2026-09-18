@@ -5,6 +5,7 @@
 
 std::pair<int, int> selection(std::vector<int>& arr)
 {
+
     std::pair<int, int> result;
 
     long long sum;
@@ -61,7 +62,7 @@ int main()
     result = selection(arr);
 
     std::cout<<result.first<<" "<<result.second<<'\n';
-
++
 
     return 0;
 }
