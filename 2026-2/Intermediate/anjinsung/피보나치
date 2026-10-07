@@ -1,0 +1,21 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	while (n--) {
+		int m;
+		cin >> m;
+		vector<pair<int, int>> f(m + 2);
+		f[0] = { 1, 0 };
+		f[1] = { 0, 1 };
+		for (int i = 2; i <= m; i++) {
+			f[i].first = f[i - 1].first + f[i - 2].first;
+			f[i].second = f[i - 1].second + f[i - 2].second;
+		}
+		cout << f[m].first << " " << f[m].second << "\n";
+	}
+}
