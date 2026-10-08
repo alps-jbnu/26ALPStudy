@@ -14,7 +14,7 @@ int main() {
     }
 
     for (int i = 0; i < n; i++) {
-        while (!st.empty() && arr[st.back()] < A[i]) {
+        while (!st.empty() && arr[st.back()] < arr[i]) {
             answer[st.back()] = arr[i];
             st.pop_back();
         }
